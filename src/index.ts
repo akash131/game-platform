@@ -9,6 +9,7 @@ export { GamePlatform } from './core/game-platform';
 export { SessionManager } from './core/session-manager';
 export { PlayerManager } from './core/player-manager';
 export { AnalyticsSystem } from './core/analytics';
+export { MatchmakingSystem } from './core/matchmaking';
 
 // Providers
 export { BaseGameProvider } from './providers/base.provider';
@@ -22,6 +23,8 @@ export { FPSGame } from './games/fps.game';
 export { StrategyGame } from './games/strategy.game';
 export { RacingGame } from './games/racing.game';
 export { RPGGame } from './games/rpg.game';
+export { BattleRoyaleGame } from './games/battle-royale.game';
+export { MOBAGame } from './games/moba.game';
 
 // Types
 export * from './types/core.types';
