@@ -26,6 +26,20 @@ export { RPGGame } from './games/rpg.game';
 export { BattleRoyaleGame } from './games/battle-royale.game';
 export { MOBAGame } from './games/moba.game';
 
+// Social Systems
+export { PartySystem } from './social/party-system';
+export { FriendSystem } from './social/friend-system';
+export { ChatSystem } from './social/chat-system';
+
+// Economy
+export { EconomySystem } from './economy/economy-system';
+
+// Tournaments
+export { TournamentSystem } from './tournaments/tournament-system';
+
+// API Server
+export { GamePlatformAPI } from './api/server';
+
 // Types
 export * from './types/core.types';
 
