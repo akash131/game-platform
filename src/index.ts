@@ -48,6 +48,24 @@ export { SessionPlacementService } from './gamelift/session-placement';
 export { AutoScalingService } from './gamelift/auto-scaling';
 export { MonitoringService, GameLiftAlarms, MetricUnit } from './gamelift/monitoring';
 
+// LiveOps (PlayFab-style)
+export { LiveOpsService } from './liveops/liveops-service';
+
+// Anti-Cheat
+export { AntiCheatService, CheatType } from './anticheat/anticheat-service';
+
+// Progression & Achievements
+export { AchievementSystem } from './progression/achievement-system';
+
+// Communication
+export { VoiceChatService } from './communication/voice-chat';
+
+// Storage
+export { CloudSaveService } from './storage/cloud-save';
+
+// Replay & Spectator
+export { ReplaySystem } from './replay/replay-system';
+
 // Types
 export * from './types/core.types';
 
