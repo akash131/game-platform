@@ -1,15 +1,38 @@
 # Game Platform
 
-Enterprise-grade game platform with cloud provider architecture, inspired by AWS, Azure, Google Cloud, and top game companies.
+Enterprise-grade game platform with cloud provider architecture, inspired by AWS, Azure, Google Cloud, and top game companies. Now with **full AWS GameLift parity** for game server fleet management!
 
 ## Features
 
+### Core Platform
 - **Multi-Provider Architecture**: Pluggable game engine providers (AWS-style, Azure-style, Google-style)
-- **Multiple Game Types**: FPS, Strategy, Racing, RPG, and more
+- **Multiple Game Types**: FPS, Strategy, Racing, RPG, Battle Royale, MOBA
 - **Cloud-Ready**: Built for scalability and distributed gaming
 - **Session Management**: Advanced player session and matchmaking
 - **Analytics**: Real-time game analytics and leaderboards
 - **Event-Driven**: Pub/sub architecture for game events
+
+### AWS GameLift Parity
+- **Fleet Management**: Complete game server fleet orchestration like AWS GameLift
+- **FlexMatch Matchmaking**: Advanced rule-based matchmaking with team balancing
+- **Game Server SDK**: Client library for game servers to integrate with fleet management
+- **Session Placement**: Intelligent game session placement across fleets with latency optimization
+- **Auto-Scaling**: Automatic fleet scaling based on capacity, utilization, and demand
+- **Monitoring & Metrics**: CloudWatch-style metrics, alarms, and dashboards
+
+### Social & Economy
+- **Party System**: Group matchmaking and team formation
+- **Friend System**: Friend requests, friend lists, and blocking
+- **Chat System**: Multi-channel chat with moderation
+- **Virtual Economy**: Dual currency system with store and inventory
+- **Tournaments**: Bracket-based tournaments with multiple formats
+
+### Enterprise Features
+- **Docker Support**: Full containerization with orchestration
+- **REST API**: Complete Express-based API
+- **Cloud Integrations**: AWS, Azure, and GCP examples
+- **CI/CD**: GitHub Actions workflow
+- **Testing**: Jest test suite
 
 ## Architecture
 
@@ -40,7 +63,9 @@ npm install
 npm run build
 ```
 
-## Usage
+## Quick Start
+
+### Basic Platform Usage
 
 ```typescript
 import { GamePlatform } from '@game-platform/core';
@@ -48,6 +73,102 @@ import { GamePlatform } from '@game-platform/core';
 const platform = new GamePlatform();
 const session = await platform.createSession('fps-game', 'player-123');
 ```
+
+### AWS GameLift Features
+
+#### Fleet Management
+
+```typescript
+import { FleetManager } from '@game-platform/gamelift';
+
+const fleetManager = new FleetManager();
+
+// Create a fleet
+const fleet = fleetManager.createFleet({
+  name: 'production-fps-fleet',
+  buildId: 'build-123',
+  instanceType: 'c5.large',
+  desiredInstances: 5,
+  minInstances: 2,
+  maxInstances: 20,
+});
+
+// Create game session
+const session = await fleetManager.createGameSession({
+  fleetId: fleet.id,
+  maximumPlayerSessionCount: 10,
+  name: 'FPS Match #1',
+});
+```
+
+#### FlexMatch Matchmaking
+
+```typescript
+import { FlexMatch } from '@game-platform/gamelift';
+
+const flexMatch = new FlexMatch();
+
+// Create matchmaking configuration
+const config = flexMatch.createMatchmakingConfiguration({
+  name: 'competitive-5v5',
+  ruleSetName: 'fps-rules',
+  requestTimeoutSeconds: 120,
+  acceptanceRequired: true,
+});
+
+// Start matchmaking
+const ticket = flexMatch.startMatchmaking('competitive-5v5', [
+  {
+    playerId: 'player-1',
+    attributes: [{ name: 'skill', value: 1500 }],
+  },
+]);
+```
+
+#### Auto-Scaling
+
+```typescript
+import { AutoScalingService } from '@game-platform/gamelift';
+
+const autoScaling = new AutoScalingService();
+autoScaling.start();
+
+// Create target tracking policy
+autoScaling.createTargetTrackingPolicy(
+  'fleet-123',
+  'maintain-50-percent-available',
+  'PercentAvailableGameSessions',
+  50
+);
+```
+
+#### Monitoring
+
+```typescript
+import { MonitoringService, MetricUnit } from '@game-platform/gamelift';
+
+const monitoring = new MonitoringService();
+monitoring.start();
+
+// Publish metrics
+monitoring.putMetricData(
+  'AWS/GameLift',
+  'ActiveInstances',
+  5,
+  MetricUnit.Count,
+  [{ name: 'FleetId', value: 'fleet-123' }]
+);
+
+// Create alarms
+monitoring.putMetricAlarm({
+  alarmName: 'HighCPU',
+  metricName: 'CPUUtilization',
+  threshold: 80,
+  comparisonOperator: 'GreaterThanThreshold',
+});
+```
+
+See `examples/gamelift-demo.ts` for a complete demo.
 
 ## Providers
 

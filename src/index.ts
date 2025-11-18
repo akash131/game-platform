@@ -40,6 +40,14 @@ export { TournamentSystem } from './tournaments/tournament-system';
 // API Server
 export { GamePlatformAPI } from './api/server';
 
+// GameLift / AWS Gaming Services
+export { FleetManager } from './gamelift/fleet-manager';
+export { FlexMatch } from './gamelift/flexmatch';
+export { GameServerSDK, ServerSDK, getServerSDK } from './gamelift/game-server-sdk';
+export { SessionPlacementService } from './gamelift/session-placement';
+export { AutoScalingService } from './gamelift/auto-scaling';
+export { MonitoringService, GameLiftAlarms, MetricUnit } from './gamelift/monitoring';
+
 // Types
 export * from './types/core.types';
 
