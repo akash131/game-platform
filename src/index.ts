@@ -66,6 +66,18 @@ export { CloudSaveService } from './storage/cloud-save';
 // Replay & Spectator
 export { ReplaySystem } from './replay/replay-system';
 
+// Cloud Streaming (GeForce Now-style)
+export { CloudStreamingService } from './streaming/cloud-streaming';
+
+// UGC / Workshop (Steam Workshop-style)
+export { WorkshopService } from './ugc/workshop';
+
+// Identity & Authentication
+export { IdentityService } from './identity/identity-service';
+
+// CDN (Content Delivery Network)
+export { CDNService } from './cdn/cdn-service';
+
 // Types
 export * from './types/core.types';
 
