@@ -58,6 +58,7 @@ export { AntiCheatService, CheatType } from './anticheat/anticheat-service';
 
 // Progression & Achievements
 export { AchievementSystem } from './progression/achievement-system';
+export { BattlePassSystem } from './progression/battle-pass';
 
 // Communication
 export { VoiceChatService } from './communication/voice-chat';
@@ -94,6 +95,12 @@ export { NotificationService } from './notifications/notification-service';
 
 // Telemetry & Performance Monitoring
 export { TelemetryService } from './telemetry/telemetry-service';
+
+// Leaderboards & Rankings
+export { LeaderboardSystem } from './leaderboards/leaderboard-system';
+
+// Moderation & Safety
+export { ModerationSystem } from './moderation/moderation-system';
 
 // Types
 export * from './types/core.types';
