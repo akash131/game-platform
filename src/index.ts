@@ -30,9 +30,11 @@ export { MOBAGame } from './games/moba.game';
 export { PartySystem } from './social/party-system';
 export { FriendSystem } from './social/friend-system';
 export { ChatSystem } from './social/chat-system';
+export { GuildSystem } from './social/guild-system';
 
 // Economy
 export { EconomySystem } from './economy/economy-system';
+export { TradingSystem } from './economy/trading-system';
 
 // Tournaments
 export { TournamentSystem } from './tournaments/tournament-system';
@@ -77,6 +79,21 @@ export { IdentityService } from './identity/identity-service';
 
 // CDN (Content Delivery Network)
 export { CDNService } from './cdn/cdn-service';
+
+// Analytics & Business Intelligence
+export { AnalyticsDashboard } from './analytics/analytics-dashboard';
+
+// Commerce & Store
+export { StorePlatform } from './commerce/store-platform';
+
+// Diagnostics & Error Tracking
+export { CrashReportingService } from './diagnostics/crash-reporting';
+
+// Notifications
+export { NotificationService } from './notifications/notification-service';
+
+// Telemetry & Performance Monitoring
+export { TelemetryService } from './telemetry/telemetry-service';
 
 // Types
 export * from './types/core.types';
