@@ -1,6 +1,28 @@
 version: '3.8'
 
 services:
+  # PostgreSQL Database (Primary)
+  postgres:
+    image: postgres:16-alpine
+    container_name: game-platform-postgres
+    environment:
+      POSTGRES_DB: game_platform
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - game-network
+    restart: unless-stopped
+
   # Game Platform API
   game-platform:
     build:
@@ -12,16 +34,29 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=game_platform
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
       - REDIS_URL=redis://redis:6379
       - MONGODB_URL=mongodb://mongo:27017/game-platform
+      - JWT_SECRET=your-super-secret-jwt-key-change-in-production
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - CORS_ORIGINS=http://localhost:5173,http://localhost:3001
     depends_on:
-      - redis
-      - mongo
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      mongo:
+        condition: service_started
     networks:
       - game-network
     restart: unless-stopped
     volumes:
       - ./logs:/app/logs
+      - ./uploads:/app/uploads
 
   # Redis for caching and sessions
   redis:
@@ -105,6 +140,7 @@ networks:
     driver: bridge
 
 volumes:
+  postgres-data:
   redis-data:
   mongo-data:
   mongo-config:
